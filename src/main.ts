@@ -11,7 +11,9 @@ header.innerHTML = gameName;
 
 const clickDisplay = document.createElement("div");
 clickDisplay.innerHTML = "0 clicks!";
+
 let counter: number = 0;
+let cps: number = 1;
 
 const mainButton = document.createElement("button");
 mainButton.innerHTML = "🐵";
@@ -26,8 +28,14 @@ app.append(mainButton);
 function mainClick() {
   counter++;
   updateCounterDisplay();
+  setInterval(autoClick, 1000);
 }
 
 function updateCounterDisplay() {
   clickDisplay.innerHTML = counter + " clicks!";
+}
+
+function autoClick(){
+    counter += cps;
+    updateCounterDisplay();
 }
