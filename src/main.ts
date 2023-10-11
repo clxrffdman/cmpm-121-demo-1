@@ -25,7 +25,7 @@ if (mainButton) {
   mainButton.addEventListener("click", () => mainClick());
 }
 
-let autoClickButtons: AutoClickButton[] = [];
+const autoClickButtons: AutoClickButton[] = [];
 
 app.append(header);
 app.append(clickDisplay);
@@ -54,7 +54,7 @@ function updateCounterDisplay() {
 }
 
 function addAutoClickButton(s: string, required: number, increase: number) {
-  let newClickButton: HTMLButtonElement = document.createElement("button");
+  const newClickButton: HTMLButtonElement = document.createElement("button");
   newClickButton.innerHTML = s;
   newClickButton.addEventListener("click", () => addCPS(increase, required));
   newClickButton.disabled = true;
