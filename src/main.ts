@@ -45,7 +45,7 @@ function updateCounterDisplay() {
   clickDisplay.innerHTML = counter.toFixed(2) + " clicks!";
 
   autoClickButtons.forEach((element) => {
-    if (counter > element.rq) {
+    if (counter >= element.rq) {
       element.button.disabled = false;
     } else {
       element.button.disabled = true;
