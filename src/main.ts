@@ -1,7 +1,11 @@
 import "./style.css";
 
-const app: HTMLDivElement = document.querySelector("#app")!;
+interface AutoClickButton {
+  button: HTMLButtonElement;
+  rq: number;
+}
 
+const app: HTMLDivElement = document.querySelector("#app")!;
 const gameName = "Calex's Game!";
 
 document.title = gameName;
@@ -21,14 +25,13 @@ if (mainButton) {
   mainButton.addEventListener("click", () => mainClick());
 }
 
-const autoClickButton = document.createElement("button");
-autoClickButton.innerHTML = "Click to increase auto-click speed.";
-autoClickButton.addEventListener("click", () => addCPS(1));
+let autoClickButtons: AutoClickButton[] = [];
 
 app.append(header);
 app.append(clickDisplay);
 app.append(mainButton);
-app.append(autoClickButton);
+
+addAutoClickButton("add 1 cps", 10, 1);
 
 //setInterval(autoClick, 1000);
 autoClick();
@@ -40,6 +43,23 @@ function mainClick() {
 
 function updateCounterDisplay() {
   clickDisplay.innerHTML = counter.toFixed(2) + " clicks!";
+
+  autoClickButtons.forEach((element) => {
+    if (counter > element.rq) {
+      element.button.disabled = false;
+    } else {
+      element.button.disabled = true;
+    }
+  });
+}
+
+function addAutoClickButton(s: string, required: number, increase: number) {
+  let newClickButton: HTMLButtonElement = document.createElement("button");
+  newClickButton.innerHTML = s;
+  newClickButton.addEventListener("click", () => addCPS(increase, required));
+  newClickButton.disabled = true;
+  app.append(newClickButton);
+  autoClickButtons.push({ button: newClickButton, rq: required });
 }
 
 function incrementCounter(a: number) {
@@ -59,6 +79,7 @@ function autoClick() {
   }
 }
 
-function addCPS(amount: number) {
+function addCPS(amount: number, cost: number) {
   cps += amount;
+  counter -= cost;
 }
