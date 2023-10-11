@@ -30,7 +30,8 @@ app.append(clickDisplay);
 app.append(mainButton);
 app.append(autoClickButton);
 
-setInterval(autoClick, 1000);
+//setInterval(autoClick, 1000);
+autoClick();
 
 function mainClick() {
   counter++;
@@ -38,12 +39,24 @@ function mainClick() {
 }
 
 function updateCounterDisplay() {
-  clickDisplay.innerHTML = counter + " clicks!";
+  clickDisplay.innerHTML = counter.toFixed(2) + " clicks!";
+}
+
+function incrementCounter(a: number) {
+  counter += a;
+  updateCounterDisplay();
 }
 
 function autoClick() {
-  counter += cps;
-  updateCounterDisplay();
+  let lastTime = performance.now();
+  window.requestAnimationFrame(cycle);
+  function cycle() {
+    const currentTime = performance.now();
+    const elapsed = currentTime - lastTime;
+    lastTime = currentTime;
+    incrementCounter((elapsed / 1000) * cps);
+    window.requestAnimationFrame(cycle);
+  }
 }
 
 function addCPS(amount: number) {
