@@ -13,7 +13,7 @@ interface Item {
   currentCount: number;
 }
 
-const allItems: Item[] = [
+const availableItems: Item[] = [
   {
     id: "hammer",
     display: "🔨",
@@ -74,9 +74,9 @@ app.append(clickDisplay);
 app.append(cpsDisplay);
 app.append(shopDescription);
 
-addAutoClickButton(allItems[0]);
-addAutoClickButton(allItems[1]);
-addAutoClickButton(allItems[2]);
+addAutoClickButton(availableItems[0]);
+addAutoClickButton(availableItems[1]);
+addAutoClickButton(availableItems[2]);
 
 //setInterval(autoClick, 1000);
 autoClick();
