@@ -15,22 +15,22 @@ interface Item {
 
 const allItems: Item[] = [
   {
-    id: "cow",
-    display: "cow",
+    id: "hammer",
+    display: "🔨",
     rq: 10,
     amount: 0.1,
     currentCount: 0,
   },
   {
-    id: "sheep",
-    display: "sheep",
+    id: "knife",
+    display: "🔪",
     rq: 100,
     amount: 2.0,
     currentCount: 0,
   },
   {
-    id: "goat",
-    display: "goat",
+    id: "angry",
+    display: "💢",
     rq: 1000,
     amount: 50,
     currentCount: 0,
@@ -38,7 +38,7 @@ const allItems: Item[] = [
 ];
 
 const app: HTMLDivElement = document.querySelector("#app")!;
-const gameName = "Calex's Game!";
+const gameName = "🥧 Time!";
 
 document.title = gameName;
 
@@ -46,19 +46,22 @@ const header = document.createElement("h1");
 header.innerHTML = gameName;
 
 const clickDisplay = document.createElement("div");
-clickDisplay.innerHTML = "0 clicks!";
+clickDisplay.innerHTML = "0 🥧s!";
 
 const shopDescription = document.createElement("div");
-shopDescription.innerHTML = "Shop";
+shopDescription.innerHTML = "<b>Shop</b>";
 
 const cpsDisplay = document.createElement("div");
-cpsDisplay.innerHTML = "The current CPS is 0!";
+cpsDisplay.innerHTML = "The current 🥧 per second is 0!";
 
 let counter: number = 0;
 let cps: number = 0;
 
 const mainButton = document.createElement("button");
-mainButton.innerHTML = "🐵";
+mainButton.innerHTML = "🥧";
+mainButton.style.width = "300px";
+mainButton.style.height = "300px";
+mainButton.style.fontSize = "80px";
 if (mainButton) {
   mainButton.addEventListener("click", () => mainClick());
 }
@@ -66,9 +69,9 @@ if (mainButton) {
 const autoClickButtons: AutoClickButton[] = [];
 
 app.append(header);
+app.append(mainButton);
 app.append(clickDisplay);
 app.append(cpsDisplay);
-app.append(mainButton);
 app.append(shopDescription);
 
 addAutoClickButton(allItems[0]);
@@ -84,13 +87,13 @@ function mainClick() {
 }
 
 function updateCounterDisplay() {
-  clickDisplay.innerHTML = counter.toFixed(2) + " clicks!";
+  clickDisplay.innerHTML = counter.toFixed(2) + " 🥧s!";
 
   updateItemVisibility();
 }
 
 function updateCPSDisplay() {
-  cpsDisplay.innerHTML = "The current CPS is " + cps.toFixed(2) + "!";
+  cpsDisplay.innerHTML = "The current 🥧 per second is " + cps.toFixed(2) + "!";
 }
 
 function updateItemVisibility() {
