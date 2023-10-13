@@ -8,6 +8,7 @@ interface AutoClickButton {
 interface Item {
   id: string;
   display: string;
+  description: string;
   rq: number;
   amount: number;
   currentCount: number;
@@ -17,6 +18,7 @@ const availableItems: Item[] = [
   {
     id: "hammer",
     display: "🔨",
+    description: "<b>Slam those pies!</b>",
     rq: 10,
     amount: 0.1,
     currentCount: 0,
@@ -24,6 +26,7 @@ const availableItems: Item[] = [
   {
     id: "knife",
     display: "🔪",
+    description: "<b>Slice and dice!</b>",
     rq: 100,
     amount: 2.0,
     currentCount: 0,
@@ -31,8 +34,25 @@ const availableItems: Item[] = [
   {
     id: "angry",
     display: "💢",
+    description: "<b>Get MAD! Rage 🥧!</b>",
     rq: 1000,
     amount: 50,
+    currentCount: 0,
+  },
+  {
+    id: "juice",
+    display: "🧃",
+    description: "<b>Drink juice and power up!</b>",
+    rq: 5000,
+    amount: 400,
+    currentCount: 0,
+  },
+  {
+    id: "kiwi",
+    display: "🥝",
+    description: "<b>Legndary kiwi pies!</b>",
+    rq: 10000,
+    amount: 1000,
     currentCount: 0,
   },
 ];
@@ -74,9 +94,9 @@ app.append(clickDisplay);
 app.append(cpsDisplay);
 app.append(shopDescription);
 
-addAutoClickButton(availableItems[0]);
-addAutoClickButton(availableItems[1]);
-addAutoClickButton(availableItems[2]);
+availableItems.forEach((element) => {
+  addAutoClickButton(element);
+});
 
 //setInterval(autoClick, 1000);
 autoClick();
@@ -109,9 +129,11 @@ function updateItemVisibility() {
 function updateItemDisplay(autoButton: AutoClickButton) {
   autoButton.button.innerHTML =
     autoButton.item.display +
+    "<br>" +
+    autoButton.item.description +
     "<br>Provides " +
     autoButton.item.amount +
-    " cps.<br>Costs " +
+    " 🥧 per second.<br>Costs " +
     autoButton.item.rq.toFixed(2) +
     " clicks.<br>Owned: " +
     autoButton.item.currentCount;
