@@ -48,6 +48,9 @@ header.innerHTML = gameName;
 const clickDisplay = document.createElement("div");
 clickDisplay.innerHTML = "0 clicks!";
 
+const shopDescription = document.createElement("div");
+shopDescription.innerHTML = "Shop";
+
 const cpsDisplay = document.createElement("div");
 cpsDisplay.innerHTML = "The current CPS is 0!";
 
@@ -66,6 +69,7 @@ app.append(header);
 app.append(clickDisplay);
 app.append(cpsDisplay);
 app.append(mainButton);
+app.append(shopDescription);
 
 addAutoClickButton(allItems[0]);
 addAutoClickButton(allItems[1]);
@@ -105,7 +109,7 @@ function updateItemDisplay(autoButton: AutoClickButton) {
     "<br>Provides " +
     autoButton.item.amount +
     " cps.<br>Costs " +
-    autoButton.item.rq +
+    autoButton.item.rq.toFixed(2) +
     " clicks.<br>Owned: " +
     autoButton.item.currentCount;
 }
@@ -143,6 +147,7 @@ function addCPS(button: AutoClickButton, amount: number, cost: number) {
   cps += amount;
   counter -= cost;
   button.item.currentCount++;
+  button.item.rq *= 1.15;
   updateCPSDisplay();
   updateItemDisplay(button);
 }
